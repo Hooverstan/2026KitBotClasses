@@ -22,9 +22,28 @@ public final class Constants {
     public static final int RIGHT_LEADER_ID = 6;
     public static final int RIGHT_FOLLOWER_ID = 7;
 
+    public static final int AUTO_START_LEFT = 1;
+    public static final int AUTO_START_RIGHT = 2;
+
+    public static final double AUTO_DRIVE_DURATION = 2.7;
+
+
     // Current limit for drivetrain motors. 60A is a reasonable maximum to reduce
     // likelihood of tripping breakers or damaging CIM motors
     public static final int DRIVE_MOTOR_CURRENT_LIMIT = 60;
+  }
+
+  public static class limelightConstants {
+    public static final double limelightMountAngleDegrees = 0;
+    public static final double limelightCameraHeightInches = 19.5;
+    public static final double targetHeightInches = 23;
+    public static final double angular_kP = 0.07;
+    public static final double linear_kP = 0.005;
+    public static final double linear_base_speed = 0.35;
+    public static final double kI = 0.001;
+    public static final double kD = 0.3;
+    public static final double iZone = 2;  
+    public static final int April_Tag_Num = 1;  
   }
 
   public static final class FuelConstants {

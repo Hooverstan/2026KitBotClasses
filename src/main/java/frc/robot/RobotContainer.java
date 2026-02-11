@@ -4,11 +4,15 @@
 
 package frc.robot;
 
+import static frc.robot.Constants.OperatorConstants.DRIVER_CONTROLLER_PORT;
+
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import static frc.robot.Constants.OperatorConstants.*;
+import frc.robot.Constants.DriveConstants;
+import frc.robot.Constants.limelightConstants;
 import frc.robot.commands.Drive;
 import frc.robot.commands.Eject;
 import frc.robot.commands.ExampleAuto;
@@ -16,6 +20,8 @@ import frc.robot.commands.Intake;
 import frc.robot.commands.LaunchSequence;
 import frc.robot.subsystems.CANDriveSubsystem;
 import frc.robot.subsystems.CANFuelSubsystem;
+import frc.robot.subsystems.LimeLightVision;
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -40,6 +46,8 @@ public class RobotContainer {
   // The autonomous chooser
   private final SendableChooser<Command> autoChooser = new SendableChooser<>();
 
+    private final LimeLightVision limelight_ = new LimeLightVision();
+
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
@@ -49,7 +57,18 @@ public class RobotContainer {
     // Set the options to show up in the Dashboard for selecting auto modes. If you
     // add additional auto modes you can add additional lines here with
     // autoChooser.addOption
-    autoChooser.setDefaultOption("Autonomous", new ExampleAuto(driveSubsystem, fuelSubsystem));
+    autoChooser.setDefaultOption("First Auto", new ExampleAuto(driveSubsystem, fuelSubsystem,
+                                                                        limelight_,
+                                                                        DriveConstants.AUTO_START_RIGHT,
+                                                                        limelightConstants.April_Tag_Num,
+                                                                        DriveConstants.AUTO_DRIVE_DURATION));
+
+    autoChooser.addOption("Second Auto", new ExampleAuto(driveSubsystem, fuelSubsystem,
+                                                                        limelight_,
+                                                                        DriveConstants.AUTO_START_LEFT,
+                                                                        limelightConstants.April_Tag_Num,
+                                                                        DriveConstants.AUTO_DRIVE_DURATION));
+    SmartDashboard.putData(autoChooser);                                                                               
   }
 
   /**
