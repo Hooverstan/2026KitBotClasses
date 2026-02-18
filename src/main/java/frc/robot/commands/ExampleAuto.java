@@ -29,10 +29,11 @@ public class ExampleAuto extends SequentialCommandGroup {
     // the timing using the withTimeout decorator
     new AutoDrive(driveSubsystem,0.5,  0.0).withTimeout(1.25), // move from start area
     new FindTarget(driveSubsystem, vision, starting_position, april_tag_num), // look for shooting basket april tag
-    // new Launch(ballSubsystem).withTimeout(10), // shoot fuel into basket
-    // new AutoDrive(driveSubsystem,0.0,  0.5).withTimeout(1.25), // turn towards ladder
-    // new AutoDrive(driveSubsystem,0.5,  0.0).withTimeout(1.25), // move towards ladder
-    // new FindTarget(driveSubsystem, vision, starting_position, april_tag_num), // look for climbing april tag
+    new AutoDrive(driveSubsystem,0.5,  0.0).withTimeout(1.25), // approach basket
+    new Launch(ballSubsystem).withTimeout(10), // shoot fuel into basket
+    new AutoDrive(driveSubsystem,0.0,  0.5).withTimeout(1.25), // turn towards ladder
+    new AutoDrive(driveSubsystem,0.5,  0.0).withTimeout(1.25), // move towards ladder
+    new FindTarget(driveSubsystem, vision, starting_position, april_tag_num), // look for climbing april tag
     new GoToTarget(driveSubsystem, 20, vision, april_tag_num)); // move towards climb
 
     // Spin up the launcher for 1 second and then launch balls for 9 seconds, for a

@@ -65,11 +65,11 @@ public class GoToTarget extends Command {
 
       // 2. Distance to target
       currentDistanceToTargetInches_ = vision_.visionTargetDistance();
-      SmartDashboard.putNumber("Apriltag distance(inches):", currentDistanceToTargetInches_ );
+      // SmartDashboard.putNumber("Apriltag distance(inches):", currentDistanceToTargetInches_ );
 
-      double error = currentDistanceToTargetInches_ - setpoint_;
+      // double error = currentDistanceToTargetInches_ - setpoint_;
       //double dt = Timer.getFPGATimestamp() - lastTimestamp;
-      SmartDashboard.putNumber("Apriltag distance error(inches):", error );
+      // SmartDashboard.putNumber("Apriltag distance error(inches):", error );
       
       //if (Math.abs(error) > limelightConstants.iZone) {
       //  errorSum += error * dt;
@@ -83,7 +83,7 @@ public class GoToTarget extends Command {
       // lastError = error;
 
       if (currentDistanceToTargetInches_ < setpoint_) {
-       drivetrain_.driveArcade(0.45,0);
+       drivetrain_.driveArcade(0.45,angularVelToTarget);
       }
     }
   }
