@@ -70,4 +70,9 @@ public class LimeLightVision extends SubsystemBase{
         distanceToTargetInches = Math.abs((limelightConstants.targetHeightInches - limelightConstants.limelightCameraHeightInches) / Math.tan(verticalAngleToTargetRadians));
         return distanceToTargetInches;
     }
+
+    public double distanceToVelocityInches(){
+        double velocity = 4;
+        return velocity;
+    }
 }
