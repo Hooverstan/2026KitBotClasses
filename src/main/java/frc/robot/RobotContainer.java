@@ -11,17 +11,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.Constants.DriveConstants;
-import frc.robot.Constants.limelightConstants;
+import frc.robot.Constants.LimelightConstants;
+import frc.robot.commands.AutoC;
+import frc.robot.commands.AutoLR;
 import frc.robot.commands.Drive;
 import frc.robot.commands.Eject;
-import frc.robot.commands.ExampleAuto;
 import frc.robot.commands.Intake;
 import frc.robot.commands.LaunchSequence;
 import frc.robot.subsystems.CANDriveSubsystem;
 import frc.robot.subsystems.CANFuelSubsystem;
 import frc.robot.subsystems.LimeLightVision;
-
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -31,22 +30,16 @@ import frc.robot.subsystems.LimeLightVision;
  * commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
-  // The robot's subsystems
-  private final CANDriveSubsystem driveSubsystem = new CANDriveSubsystem();
-  private final CANFuelSubsystem fuelSubsystem = new CANFuelSubsystem();
+   // The robot's subsystems
+   private final CANDriveSubsystem driveSubsystem_ = new CANDriveSubsystem();
+   private final CANFuelSubsystem fuelSubsystem_ = new CANFuelSubsystem();
+   private final LimeLightVision limelight_ = new LimeLightVision();
 
-  // The driver's controller
-  private final CommandXboxController driverController = new CommandXboxController(
-      DRIVER_CONTROLLER_PORT);
-
-  // The operator's controller
-  // private final CommandXboxController operatorController = new CommandXboxController(
-  //     OPERATOR_CONTROLLER_PORT);
-
-  // The autonomous chooser
-  private final SendableChooser<Command> autoChooser = new SendableChooser<>();
-
-    private final LimeLightVision limelight_ = new LimeLightVision();
+   // The driver's controller
+   private final CommandXboxController driverController_ = 
+                     new CommandXboxController(DRIVER_CONTROLLER_PORT);
+   // The autonomous chooser
+   private final SendableChooser<Command> autoChooser = new SendableChooser<>();
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -54,20 +47,15 @@ public class RobotContainer {
   public RobotContainer() {
     configureBindings();
 
-    // Set the options to show up in the Dashboard for selecting auto modes. If you
-    // add additional auto modes you can add additional lines here with
-    // autoChooser.addOption
-    autoChooser.setDefaultOption("First Auto", new ExampleAuto(driveSubsystem, fuelSubsystem,
-                                                                        limelight_,
-                                                                        DriveConstants.AUTO_START_RIGHT,
-                                                                        limelightConstants.April_Tag_Num,
-                                                                        DriveConstants.AUTO_DRIVE_DURATION));
+    autoChooser.setDefaultOption("AutoLR", new AutoLR(driveSubsystem_, 
+                                                           fuelSubsystem_,
+                                                           limelight_,
+                                                           LimelightConstants.HUB_APRIL_TAG));
 
-    autoChooser.addOption("Second Auto", new ExampleAuto(driveSubsystem, fuelSubsystem,
-                                                                        limelight_,
-                                                                        DriveConstants.AUTO_START_LEFT,
-                                                                        limelightConstants.April_Tag_Num,
-                                                                        DriveConstants.AUTO_DRIVE_DURATION));
+    autoChooser.addOption("AutoC", new AutoC(driveSubsystem_, 
+                                                           fuelSubsystem_,
+                                                           limelight_,
+                                                           LimelightConstants.HUB_APRIL_TAG));
     SmartDashboard.putData(autoChooser);                                                                               
   }
 
@@ -83,24 +71,26 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-
     // While the left bumper on operator controller is held, intake Fuel
-    driverController.leftBumper().whileTrue(new Intake(fuelSubsystem));
+    driverController_.leftBumper().whileTrue(new Intake(fuelSubsystem_));
     // While the right bumper on the operator controller is held, spin up for 1
     // second, then launch fuel. When the button is released, stop.
-    driverController.rightBumper().whileTrue(new LaunchSequence(fuelSubsystem));
+    driverController_.rightBumper().whileTrue(new LaunchSequence(fuelSubsystem_,
+                                                                 limelight_,
+                                                                 LimelightConstants.HUB_APRIL_TAG));
+
     // While the A button is held on the operator controller, eject fuel back out
     // the intake
-    //driverController.a().whileTrue(new Eject(fuelSubsystem));
+    driverController_.a().whileTrue(new Eject(fuelSubsystem_));
 
     // Set the default command for the drive subsystem to the command provided by
     // factory with the values provided by the joystick axes on the driver
     // controller. The Y axis of the controller is inverted so that pushing the
     // stick away from you (a negative value) drives the robot forwards (a positive
     // value)
-    driveSubsystem.setDefaultCommand(new Drive(driveSubsystem, driverController));
+    driveSubsystem_.setDefaultCommand(new Drive(driveSubsystem_, driverController_));
 
-    fuelSubsystem.setDefaultCommand(fuelSubsystem.run(() -> fuelSubsystem.stop()));
+    fuelSubsystem_.setDefaultCommand(fuelSubsystem_.run(() -> fuelSubsystem_.stop()));
   }
 
   /**

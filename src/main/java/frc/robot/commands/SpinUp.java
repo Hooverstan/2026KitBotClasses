@@ -8,26 +8,42 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.CANFuelSubsystem;
 import static frc.robot.Constants.FuelConstants.*;
+import frc.robot.subsystems.LimeLightVision;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class SpinUp extends Command {
-  /** Creates a new Intake. */
+  CANFuelSubsystem fuelSubsystem_;
+  LimeLightVision limeLightVision_;
+  int aprilTagNum_;
 
-  CANFuelSubsystem fuelSubsystem;
-
-  public SpinUp(CANFuelSubsystem fuelSystem) {
-    addRequirements(fuelSystem);
-    this.fuelSubsystem = fuelSystem;
+  public SpinUp(CANFuelSubsystem fuelSystem,
+                LimeLightVision limeLightVision,
+                int aprilTag) 
+  {
+    addRequirements(fuelSystem, limeLightVision);
+    fuelSubsystem_ = fuelSystem;
+    limeLightVision_ = limeLightVision;
+    aprilTagNum_ = aprilTag;
   }
 
   // Called when the command is initially scheduled. Set the rollers to the
   // appropriate values for intaking
   @Override
   public void initialize() {
-    fuelSubsystem
+    double distanceToTargetInches = limeLightVision_.visionTargetDistance();
+    SmartDashboard.putNumber("Hub Apriltag distance(inches):", distanceToTargetInches );
+   
+    double targetVoltage = fuelSubsystem_.getVoltageForDistance(distanceToTargetInches);
+
+    fuelSubsystem_
         .setLauncher(
-            SmartDashboard.getNumber("Launching launcher roller value", LAUNCHING_LAUNCHER_VOLTAGE));
-    fuelSubsystem.setLauncherFeederRoller(SmartDashboard.getNumber("Launching spin-up feeder value", SPIN_UP_FEEDER_VOLTAGE));
+            SmartDashboard.getNumber("Launching launcher roller value", targetVoltage));
+    fuelSubsystem_.setFeeder(SmartDashboard.getNumber("Launching spin-up feeder value", SPIN_UP_FEEDER_VOLTAGE));
+    
+    //fuelSubsystem_
+    //    .setLauncher(
+    //        SmartDashboard.getNumber("Launching launcher roller value", LAUNCHING_LAUNCHER_VOLTAGE));
+    //fuelSubsystem_.setFeeder(SmartDashboard.getNumber("Launching spin-up feeder value", SPIN_UP_FEEDER_VOLTAGE));
   }
 
   // Called every time the scheduler runs while the command is scheduled. This

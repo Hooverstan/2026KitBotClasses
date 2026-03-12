@@ -4,8 +4,6 @@
 
 package frc.robot.subsystems;
 
-import com.revrobotics.spark.SparkBase.PersistMode;
-import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.SparkMax;
@@ -13,11 +11,13 @@ import com.revrobotics.spark.SparkMax;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import static frc.robot.Constants.FuelConstants.*;
+import edu.wpi.first.math.interpolation.InterpolatingDoubleTreeMap;
 
 public class CANFuelSubsystem extends SubsystemBase {
   private final SparkMax IntakeRoller;
   private final SparkMax LauncherFeederRoller;
   private final SparkMax LauncherRoller;
+  private final InterpolatingDoubleTreeMap speedTable;
 
   /** Creates a new CANBallSubsystem. */
   public CANFuelSubsystem() {
@@ -25,6 +25,11 @@ public class CANFuelSubsystem extends SubsystemBase {
     LauncherFeederRoller = new SparkMax(FEEDER_MOTOR_ID, MotorType.kBrushed);
     IntakeRoller = new SparkMax(INTAKE_MOTOR_ID, MotorType.kBrushless);
     LauncherRoller = new SparkMax(LAUNCHER_MOTOR_ID, MotorType.kBrushless);
+    
+    speedTable = new InterpolatingDoubleTreeMap();
+    speedTable.put(1.5, 6.0); // Distance(m), Voltage(v)
+    speedTable.put(3.0, 8.5);
+    speedTable.put(5.0, 12.0);
     // create the configuration for the feeder roller, set a current limit and apply
     // the config to the controller
     SparkMaxConfig feederConfig = new SparkMaxConfig();
@@ -50,19 +55,23 @@ public class CANFuelSubsystem extends SubsystemBase {
   }
 
   // A method to set the voltage of the intake roller
-  public void setLauncherFeederRoller(double voltage) {
+  public void setFeeder(double voltage) {
     LauncherFeederRoller.setVoltage(voltage);
   }
 
   // A method to set the voltage of the intake roller
-  public void setIntakeRoller(double voltage) {
+  public void setIntake(double voltage) {
     IntakeRoller.setVoltage(voltage);
   }
 
-    public void setLauncher(double voltage) {
+  public void setLauncher(double voltage) {
     LauncherRoller.setVoltage(voltage);
   }
 
+  public double getVoltageForDistance(double distance) {
+    // Returns interpolated voltage for any distance
+    return speedTable.get(distance);
+  }
 
   // A method to stop the rollers
   public void stop() {

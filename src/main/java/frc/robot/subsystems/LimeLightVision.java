@@ -4,7 +4,7 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.limelightConstants;
+import frc.robot.Constants.LimelightConstants;
 
 public class LimeLightVision extends SubsystemBase{
     private final NetworkTable limelightTable;
@@ -59,15 +59,13 @@ public class LimeLightVision extends SubsystemBase{
         }
     }
 
-    /*
-     */
     public double visionTargetDistance(){
 
         double targetAngle_Vertical = ty;
-        double verticalAngleToTargetDegrees = limelightConstants.limelightMountAngleDegrees + targetAngle_Vertical;
+        double verticalAngleToTargetDegrees = LimelightConstants.limelightMountAngleDegrees + targetAngle_Vertical;
         double verticalAngleToTargetRadians = verticalAngleToTargetDegrees * Math.PI / 180.0;
 
-        distanceToTargetInches = Math.abs((limelightConstants.targetHeightInches - limelightConstants.limelightCameraHeightInches) / Math.tan(verticalAngleToTargetRadians));
+        distanceToTargetInches = Math.abs((LimelightConstants.targetHeightInches - LimelightConstants.limelightCameraHeightInches) / Math.tan(verticalAngleToTargetRadians));
         return distanceToTargetInches;
     }
 
