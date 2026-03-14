@@ -54,10 +54,10 @@ public class Launch extends Command {
   // Called once the command ends or is interrupted. Stop the rollers
   @Override
   public void end(boolean interrupted) {
-    fuelSubsystem_.setLauncher(0.0);
-    SmartDashboard.putNumber("Launching launcher value:", 0.0 );
-    fuelSubsystem_.setFeeder(0.0);
-    SmartDashboard.putNumber("Launching feeder value:", 0.0 );
+    // fuelSubsystem_.setLauncher(0.0);
+    // SmartDashboard.putNumber("Launching launcher value:", 0.0 );
+    // fuelSubsystem_.setFeeder(0.0);
+    // SmartDashboard.putNumber("Launching feeder value:", 0.0 );
   }
 
   // Returns true when the command should end.

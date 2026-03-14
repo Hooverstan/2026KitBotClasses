@@ -37,8 +37,8 @@ public class Eject extends Command {
   // Called once the command ends or is interrupted. Stop the rollers
   @Override
   public void end(boolean interrupted) {
-    fuelSubsystem.setIntake(0);
-    SmartDashboard.putNumber("Intaking roller value:", 0.0 );
+    // fuelSubsystem.setIntake(0);
+    // SmartDashboard.putNumber("Intaking roller value:", 0.0 );
   }
 
   // Returns true when the command should end.

@@ -62,8 +62,8 @@ public final class Constants {
     // based on exact robot construction.
     // See the Software Guide for tuning information
     public static final double INTAKE_VOLTAGE = -10;
-    public static final double LAUNCHING_FEEDER_VOLTAGE = -8; // feeds into launcher
-    public static final double LAUNCHING_LAUNCHER_VOLTAGE = 6; // shoots fuel
+    public static final double LAUNCHING_FEEDER_VOLTAGE = -12; // feeds into launcher
+    public static final double LAUNCHING_LAUNCHER_VOLTAGE = 9; // shoots fuel
     public static final double SPIN_UP_FEEDER_VOLTAGE = -6;
     public static final double SPIN_UP_SECONDS = 0;
     public static final double LAUNCH_DISTANCE_MAX_INCHES = 240.0; // 20 ft
