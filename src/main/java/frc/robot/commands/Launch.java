@@ -31,10 +31,15 @@ public class Launch extends Command {
   // appropriate values for intaking
   @Override
   public void initialize() {
-        // Determine voltage needed given distance
+  }
+
+  // Called every time the scheduler runs while the command is scheduled. This
+  // command doesn't require updating any values while running
+  @Override
+  public void execute() {
+            // Determine voltage needed given distance
     double distanceToTargetInches = limeLightVision_.visionTargetDistance();
     SmartDashboard.putNumber("Hub Apriltag distance(inches):", distanceToTargetInches );
-   
     double targetVoltage = fuelSubsystem_.getVoltageForDistance(distanceToTargetInches);
     fuelSubsystem_
         .setLauncher(
@@ -43,12 +48,7 @@ public class Launch extends Command {
 
     //fuelSubsystem_.setLauncher(SmartDashboard.getNumber("Launching launcher roller value", LAUNCHING_LAUNCHER_VOLTAGE));
     //fuelSubsystem_.setFeeder(SmartDashboard.getNumber("Launching feeder roller value", LAUNCHING_FEEDER_VOLTAGE));
-  }
 
-  // Called every time the scheduler runs while the command is scheduled. This
-  // command doesn't require updating any values while running
-  @Override
-  public void execute() {
   }
 
   // Called once the command ends or is interrupted. Stop the rollers

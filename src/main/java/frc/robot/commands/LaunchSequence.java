@@ -30,8 +30,8 @@ public class LaunchSequence extends SequentialCommandGroup {
         //new SpinUp(fuelSubsystem).withTimeout(FuelConstants.SPIN_UP_SECONDS));
         //new Launch(fuelSubsystem)
 
-        new VerifyLaunchPose(limeLightVision, aprilTagNum),
-        new SpinUp(fuelSubsystem, limeLightVision, aprilTagNum).withTimeout(1.0),
+        //new VerifyLaunchPose(limeLightVision, aprilTagNum),
+        //new SpinUp(fuelSubsystem, limeLightVision, aprilTagNum).withTimeout(0.5),
         new Launch(fuelSubsystem, limeLightVision, aprilTagNum)
         );
   }

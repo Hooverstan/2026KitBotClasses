@@ -14,7 +14,7 @@ import frc.robot.subsystems.LimeLightVision;
 public class SpinUp extends Command {
   CANFuelSubsystem fuelSubsystem_;
   LimeLightVision limeLightVision_;
-  int aprilTagNum_;
+  int aprilTag_;
 
   public SpinUp(CANFuelSubsystem fuelSystem,
                 LimeLightVision limeLightVision,
@@ -23,7 +23,7 @@ public class SpinUp extends Command {
     addRequirements(fuelSystem, limeLightVision);
     fuelSubsystem_ = fuelSystem;
     limeLightVision_ = limeLightVision;
-    aprilTagNum_ = aprilTag;
+    aprilTag_ = aprilTag;
   }
 
   // Called when the command is initially scheduled. Set the rollers to the
@@ -38,8 +38,10 @@ public class SpinUp extends Command {
     fuelSubsystem_
         .setLauncher(
             SmartDashboard.getNumber("Launching launcher roller value", targetVoltage));
-    fuelSubsystem_.setFeeder(SmartDashboard.getNumber("Launching spin-up feeder value", SPIN_UP_FEEDER_VOLTAGE));
-    
+
+    // Spinning the feeder in reverse while launching spins up.
+    //fuelSubsystem_.setFeeder(SmartDashboard.getNumber("Launching spin-up feeder value", SPIN_UP_FEEDER_VOLTAGE));
+
     //fuelSubsystem_
     //    .setLauncher(
     //        SmartDashboard.getNumber("Launching launcher roller value", LAUNCHING_LAUNCHER_VOLTAGE));

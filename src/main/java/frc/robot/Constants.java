@@ -34,9 +34,9 @@ public final class Constants {
   }
 
   public static class LimelightConstants {
-    public static final double limelightMountAngleDegrees = 0;
-    public static final double limelightCameraHeightInches = 19.5;
-    public static final double targetHeightInches = 23;
+    public static final double limelightMountAngleDegrees = 16;
+    public static final double limelightCameraHeightInches = 21;
+    public static final double targetHeightInches = 44.25; // Hub apriltag height.
     public static final double angular_kP = 0.07;
     public static final double linear_kP = 0.005;
     public static final double linear_base_speed = 0.35;
@@ -62,13 +62,13 @@ public final class Constants {
     // based on exact robot construction.
     // See the Software Guide for tuning information
     public static final double INTAKE_VOLTAGE = -10;
-    public static final double LAUNCHING_FEEDER_VOLTAGE = -12; // feeds into launcher
-    public static final double LAUNCHING_LAUNCHER_VOLTAGE = 10; // shoots fuel
+    public static final double LAUNCHING_FEEDER_VOLTAGE = -8; // feeds into launcher
+    public static final double LAUNCHING_LAUNCHER_VOLTAGE = 6; // shoots fuel
     public static final double SPIN_UP_FEEDER_VOLTAGE = -6;
     public static final double SPIN_UP_SECONDS = 0;
-    public static final double LAUNCH_DISTANCE_MAX_FT = 10.0;
-    public static final double LAUNCH_DISTANCE_MIN_FT = 1.0;
-    public static final double LAUNCH_ANGLE_MAX_DEG = 10.0;    
+    public static final double LAUNCH_DISTANCE_MAX_INCHES = 240.0; // 20 ft
+    public static final double LAUNCH_DISTANCE_MIN_INCHES = 36.0;  // 3 ft
+    public static final double LAUNCH_ANGLE_MAX_DEG = 10.0;        // Azimuth angle off normal
   }
 
   public static final class OperatorConstants {

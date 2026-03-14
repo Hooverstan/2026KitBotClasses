@@ -19,11 +19,9 @@ public class AutoLR extends SequentialCommandGroup {
                 CANFuelSubsystem fuelSubsystem,
                 LimeLightVision limeLightVision,
                 int aprilTag) {
-    // Add your commands in the addCommands() call, e.g.
-    // addCommands(new FooCommand(), new BarCommand());
+
     addCommands(
-      new LaunchSequence(fuelSubsystem, limeLightVision, aprilTag),
-      new DriveSeconds(driveSubsystem, 2.5, DriveConstants.AUTO_BACKWARDS_DRIVE)
+      new LaunchSequence(fuelSubsystem, limeLightVision, aprilTag)
     );
   }
 }

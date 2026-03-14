@@ -27,9 +27,10 @@ public class CANFuelSubsystem extends SubsystemBase {
     LauncherRoller = new SparkMax(LAUNCHER_MOTOR_ID, MotorType.kBrushless);
     
     speedTable = new InterpolatingDoubleTreeMap();
-    speedTable.put(1.5, 6.0); // Distance(m), Voltage(v)
-    speedTable.put(3.0, 8.5);
-    speedTable.put(5.0, 12.0);
+    speedTable.put(58.5, 6.0); // Distance(inches), Voltage(v)
+    speedTable.put(117.0, 8.5);
+    speedTable.put(351.0, 12.0);
+
     // create the configuration for the feeder roller, set a current limit and apply
     // the config to the controller
     SparkMaxConfig feederConfig = new SparkMaxConfig();
