@@ -34,7 +34,7 @@ public final class Constants {
   }
 
   public static class LimelightConstants {
-    public static final double limelightMountAngleDegrees = 16;
+    public static final double limelightMountAngleDegrees = 0;
     public static final double limelightCameraHeightInches = 21;
     public static final double targetHeightInches = 44.25; // Hub apriltag height.
     public static final double angular_kP = 0.07;
@@ -52,6 +52,8 @@ public final class Constants {
     public static final int FEEDER_MOTOR_ID = 10;
     public static final int INTAKE_MOTOR_ID = 11;
     public static final int LAUNCHER_MOTOR_ID = 12;
+    public static final int BELT_MOTOR_ID = 13;
+    
 
     // Current limit and nominal voltage for fuel mechanism motors.
     public static final int FEEDER_MOTOR_CURRENT_LIMIT = 60;
@@ -61,11 +63,12 @@ public final class Constants {
     // Voltage values for various fuel operations. These values may need to be tuned
     // based on exact robot construction.
     // See the Software Guide for tuning information
-    public static final double INTAKE_VOLTAGE = -10;
+    public static final double BELT_VOLTAGE = -6; // the conveyor belt voltage
+    public static final double INTAKE_VOLTAGE = -10; // intaking voltage
     public static final double LAUNCHING_FEEDER_VOLTAGE = -12; // feeds into launcher
-    public static final double LAUNCHING_LAUNCHER_VOLTAGE = 9; // shoots fuel
+    public static final double LAUNCHING_LAUNCHER_VOLTAGE = 5; // shoots fuel
     public static final double SPIN_UP_FEEDER_VOLTAGE = -6;
-    public static final double SPIN_UP_SECONDS = 0;
+    public static final double SPIN_UP_SECONDS = 0.5;
     public static final double LAUNCH_DISTANCE_MAX_INCHES = 240.0; // 20 ft
     public static final double LAUNCH_DISTANCE_MIN_INCHES = 36.0;  // 3 ft
     public static final double LAUNCH_ANGLE_MAX_DEG = 10.0;        // Azimuth angle off normal
@@ -79,7 +82,7 @@ public final class Constants {
 
     // This value is multiplied by the joystick value when rotating the robot to
     // help avoid turning too fast and beign difficult to control
-    public static final double DRIVE_SCALING = .7;
+    public static final double DRIVE_SCALING = .9;
     public static final double ROTATION_SCALING = .8;
   }
 }

@@ -17,6 +17,7 @@ public class CANFuelSubsystem extends SubsystemBase {
   private final SparkMax IntakeRoller;
   private final SparkMax LauncherFeederRoller;
   private final SparkMax LauncherRoller;
+  private final SparkMax BeltMotor;
   private final InterpolatingDoubleTreeMap speedTable;
 
   /** Creates a new CANBallSubsystem. */
@@ -25,11 +26,14 @@ public class CANFuelSubsystem extends SubsystemBase {
     LauncherFeederRoller = new SparkMax(FEEDER_MOTOR_ID, MotorType.kBrushed);
     IntakeRoller = new SparkMax(INTAKE_MOTOR_ID, MotorType.kBrushless);
     LauncherRoller = new SparkMax(LAUNCHER_MOTOR_ID, MotorType.kBrushless);
-    
+    BeltMotor = new SparkMax(BELT_MOTOR_ID, MotorType.kBrushed);
     speedTable = new InterpolatingDoubleTreeMap();
-    speedTable.put(58.5, 6.0); // Distance(inches), Voltage(v)
-    speedTable.put(117.0, 8.5);
-    speedTable.put(351.0, 12.0);
+    speedTable.put(45.0, 7.0);
+    speedTable.put(85.0, 8.0); // Distance(inches), Voltage(v)
+    speedTable.put(117.0, 9.0);
+    speedTable.put(210.0, 10.0);
+    speedTable.put(270.0, 11.0);
+    
 
     // create the configuration for the feeder roller, set a current limit and apply
     // the config to the controller
@@ -69,6 +73,10 @@ public class CANFuelSubsystem extends SubsystemBase {
     LauncherRoller.setVoltage(voltage);
   }
 
+  public void setBelt(double voltage) {
+    BeltMotor.setVoltage(voltage);
+  }
+
   public double getVoltageForDistance(double distance) {
     // Returns interpolated voltage for any distance
     return speedTable.get(distance);
@@ -79,6 +87,7 @@ public class CANFuelSubsystem extends SubsystemBase {
     IntakeRoller.set(0);
     LauncherFeederRoller.set(0);
     LauncherRoller.set(0);
+    BeltMotor.set(0);
   }
 
   @Override

@@ -15,7 +15,8 @@ import frc.robot.Constants.LimelightConstants;
 import frc.robot.commands.AutoC;
 import frc.robot.commands.AutoLR;
 import frc.robot.commands.Drive;
-import frc.robot.commands.Eject;
+import frc.robot.commands.FeederTest;
+import frc.robot.commands.UnjamFeeder;
 import frc.robot.commands.Intake;
 import frc.robot.commands.LaunchSequence;
 import frc.robot.subsystems.CANDriveSubsystem;
@@ -81,7 +82,8 @@ public class RobotContainer {
 
     // While the A button is held on the operator controller, eject fuel back out
     // the intake
-    driverController_.a().whileTrue(new Eject(fuelSubsystem_));
+    driverController_.a().whileTrue(new UnjamFeeder(fuelSubsystem_));
+    driverController_.x().whileTrue(new FeederTest(fuelSubsystem_));
 
     // Set the default command for the drive subsystem to the command provided by
     // factory with the values provided by the joystick axes on the driver

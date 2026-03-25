@@ -43,9 +43,9 @@ public class Launch extends Command {
     double targetVoltage = fuelSubsystem_.getVoltageForDistance(distanceToTargetInches);
     fuelSubsystem_
         .setLauncher(
-            SmartDashboard.getNumber("Launching launcher value:", targetVoltage));
+            SmartDashboard.getNumber("Launching launcher value:", targetVoltage)); //targetVoltage
     fuelSubsystem_.setFeeder(SmartDashboard.getNumber("Launching feeder value:", LAUNCHING_FEEDER_VOLTAGE));
-
+    fuelSubsystem_.setBelt(BELT_VOLTAGE);
     //fuelSubsystem_.setLauncher(SmartDashboard.getNumber("Launching launcher roller value", LAUNCHING_LAUNCHER_VOLTAGE));
     //fuelSubsystem_.setFeeder(SmartDashboard.getNumber("Launching feeder roller value", LAUNCHING_FEEDER_VOLTAGE));
 
@@ -55,7 +55,7 @@ public class Launch extends Command {
   @Override
   public void end(boolean interrupted) {
     // fuelSubsystem_.setLauncher(0.0);
-    // SmartDashboard.putNumber("Launching launcher value:", 0.0 );
+    // SmartDashboard.putNumber("Launchin g launcher value:", 0.0 );
     // fuelSubsystem_.setFeeder(0.0);
     // SmartDashboard.putNumber("Launching feeder value:", 0.0 );
   }
