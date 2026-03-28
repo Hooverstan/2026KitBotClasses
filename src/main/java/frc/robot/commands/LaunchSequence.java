@@ -7,6 +7,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.CANFuelSubsystem;
 import frc.robot.subsystems.LimeLightVision;
+import frc.robot.subsystems.CANDriveSubsystem;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -20,7 +21,8 @@ public class LaunchSequence extends SequentialCommandGroup {
   //public LaunchSequence(CANFuelSubsystem fuelSubsystem) {
   public LaunchSequence(CANFuelSubsystem fuelSubsystem,
                         LimeLightVision limeLightVision,
-                        int aprilTagNum) {
+                        int aprilTagNum,
+                        CANDriveSubsystem driveSubsystem) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
           //angleToTargetDegrees = limelight.getTX();
@@ -31,7 +33,7 @@ public class LaunchSequence extends SequentialCommandGroup {
         //new Launch(fuelSubsystem)
 
         //new VerifyLaunchPose(limeLightVision, aprilTagNum),
-        //new SpinUp(fuelSubsystem, limeLightVision, aprilTagNum).withTimeout(0.3),
+        new SpinUp(fuelSubsystem, limeLightVision, aprilTagNum, driveSubsystem).withTimeout(0.4),
         new Launch(fuelSubsystem, limeLightVision, aprilTagNum)
         );
   }

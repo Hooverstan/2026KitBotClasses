@@ -21,7 +21,7 @@ public class AutoLR extends SequentialCommandGroup {
                 int aprilTag) {
 
     addCommands(
-      new LaunchSequence(fuelSubsystem, limeLightVision, aprilTag)
+      new LaunchSequence(fuelSubsystem, limeLightVision, aprilTag, driveSubsystem)
     );
   }
 }

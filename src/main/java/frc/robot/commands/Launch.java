@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.CANFuelSubsystem;
 import static frc.robot.Constants.FuelConstants.*;
 import frc.robot.subsystems.LimeLightVision;
+import frc.robot.subsystems.CANDriveSubsystem;
+
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class Launch extends Command {
@@ -44,7 +46,7 @@ public class Launch extends Command {
     fuelSubsystem_
         .setLauncher(
             SmartDashboard.getNumber("Launching launcher value:", targetVoltage)); //targetVoltage
-    fuelSubsystem_.setFeeder(SmartDashboard.getNumber("Launching feeder value:", LAUNCHING_FEEDER_VOLTAGE));
+    fuelSubsystem_.setFeeder(SmartDashboard.getNumber("Launching feeder value:", -LAUNCHING_FEEDER_VOLTAGE));
     fuelSubsystem_.setBelt(BELT_VOLTAGE);
     //fuelSubsystem_.setLauncher(SmartDashboard.getNumber("Launching launcher roller value", LAUNCHING_LAUNCHER_VOLTAGE));
     //fuelSubsystem_.setFeeder(SmartDashboard.getNumber("Launching feeder roller value", LAUNCHING_FEEDER_VOLTAGE));

@@ -78,7 +78,8 @@ public class RobotContainer {
     // second, then launch fuel. When the button is released, stop.
     driverController_.rightBumper().whileTrue(new LaunchSequence(fuelSubsystem_,
                                                                  limelight_,
-                                                                 LimelightConstants.HUB_APRIL_TAG));
+                                                                 LimelightConstants.HUB_APRIL_TAG,
+                                                                 driveSubsystem_));
 
     // While the A button is held on the operator controller, eject fuel back out
     // the intake

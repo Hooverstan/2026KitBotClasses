@@ -24,7 +24,7 @@ public class AutoC extends SequentialCommandGroup {
     addCommands(
       // new Drive in reverse for a second.
       new DriveSeconds(driveSubsystem, 2.5, DriveConstants.AUTO_BACKWARDS_DRIVE),
-      new LaunchSequence(fuelSubsystem, limeLightVision, aprilTag)
+      new LaunchSequence(fuelSubsystem, limeLightVision, aprilTag, driveSubsystem)
     );
   }
 }

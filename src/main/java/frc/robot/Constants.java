@@ -34,7 +34,7 @@ public final class Constants {
   }
 
   public static class LimelightConstants {
-    public static final double limelightMountAngleDegrees = 0;
+    public static final double limelightMountAngleDegrees = 25;
     public static final double limelightCameraHeightInches = 21;
     public static final double targetHeightInches = 44.25; // Hub apriltag height.
     public static final double angular_kP = 0.07;
